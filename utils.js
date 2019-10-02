@@ -23,30 +23,7 @@
  * 性能优化
  * debounce 防抖函数，用于高频触发事件，减少请求
  * throttle 节流函数
- * 
- * 
- * 移动端bug解决方法总结
- * 问题描述：IOS系统 input输入框失去焦点，软键盘关闭后，被撑起的页面无法回退到原来正常的位置，导致弹框里的按钮响应区域错位
-     *解决方案 给输入框绑定 onblur 事件，让页面自动滚动到顶部
- function(){
-      setTimeout(function() {
-          var scrollHeight = document.documentElement.scrollTop || document.body.scrollTop || 0;
-           window.scrollTo(0, Math.max(scrollHeight - 1, 0));
-     }, 100);
-  }
- *问题描述： Android 弹出的键盘挡住输入框
-     *解决方法 绑定focus事件
-     function (){
-         let  u = navigator.userAgent,app=navigator.appVersion;
-         let isAndroid = u.toLowerCase().indexOf('android')>-1 ||  u.toLowerCase().indexOf('linux')>-1;
-         if(isAndroid){
-           serTimeout(function(){
-             document.activeElement.scrollIntoViewIfNeeded();
-             document.activeElement.scrollIntoView();
-           })
-         }
-     }
- * 
+ *  
  */
 module.exports = {
   getCookie: (name) => {
@@ -134,7 +111,7 @@ module.exports = {
     }
   },
   addClass: (obj, classStr) => {
-    if ((this.istype(obj, 'array') || this.istype(obj, 'elements')) && obj.length >= 1) {
+    if ((this.typeof(obj, 'array') || this.typeof(obj, 'elements')) && obj.length >= 1) {
       for (var i = 0, len = obj.length; i < len; i++) {
         if (!this.hasClass(obj[i], classStr)) {
           obj[i].className += " " + classStr;
@@ -145,9 +122,9 @@ module.exports = {
         obj.className += " " + classStr;
       }
     }
-  }, //合并冲突
+  },
   removeClass: (obj, classStr) => {
-    if ((this.istype(obj, 'array') || this.istype(obj, 'elements')) && obj.length > 1) {
+    if ((this.typeof(obj, 'array') || this.typeof(obj, 'elements')) && obj.length > 1) {
       for (var i = 0, len = obj.length; i < len; i++) {
         if (this.hasClass(obj[i], classStr)) {
           var reg = new RegExp('(\\s|^)' + classStr + '(\\s|$)');
